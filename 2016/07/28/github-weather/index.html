@@ -1,0 +1,813 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="开源项目," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="一款查询中国天气的软件数据来源：http://apis.baidu.com/apistore/weatherservice
+
+实战中学习Retrofit、RxJava、RxAndroid的实际应用，若未接触过可先移步Retrofit、RxJava&amp;amp;RxAndroid进行学习。
+先看效果图：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源项目|易天气">
+<meta property="og:url" content="https://codepet.github.io/2016/07/28/github-weather/index.html">
+<meta property="og:site_name" content="Codepet's Blog">
+<meta property="og:description" content="一款查询中国天气的软件数据来源：http://apis.baidu.com/apistore/weatherservice
+
+实战中学习Retrofit、RxJava、RxAndroid的实际应用，若未接触过可先移步Retrofit、RxJava&amp;amp;RxAndroid进行学习。
+先看效果图：">
+<meta property="og:image" content="http://ob0ft1si1.bkt.clouddn.com/Screenshot_2016-07-28-14-44-01_com.gc.weather.png">
+<meta property="og:updated_time" content="2016-08-03T11:30:33.754Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开源项目|易天气">
+<meta name="twitter:description" content="一款查询中国天气的软件数据来源：http://apis.baidu.com/apistore/weatherservice
+
+实战中学习Retrofit、RxJava、RxAndroid的实际应用，若未接触过可先移步Retrofit、RxJava&amp;amp;RxAndroid进行学习。
+先看效果图：">
+<meta name="twitter:image" content="http://ob0ft1si1.bkt.clouddn.com/Screenshot_2016-07-28-14-44-01_com.gc.weather.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://codepet.github.io/2016/07/28/github-weather/"/>
+
+  <title> 开源项目|易天气 | Codepet's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Codepet's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Learn and live</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                开源项目|易天气
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-28T15:29:00+08:00" content="2016-07-28">
+              2016-07-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>一款查询中国天气的软件<br>数据来源：<a href="http://apis.baidu.com/apistore/weatherservice" target="_blank" rel="external">http://apis.baidu.com/apistore/weatherservice</a></p>
+</blockquote>
+<p>实战中学习<code>Retrofit</code>、<code>RxJava</code>、<code>RxAndroid</code>的实际应用，若未接触过可先移步<a href="http://www.tuicool.com/articles/26jUZjv" target="_blank" rel="external">Retrofit</a>、<a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">RxJava&amp;RxAndroid</a>进行学习。</p>
+<p>先看效果图：</p>
+<p><img src="http://ob0ft1si1.bkt.clouddn.com/Screenshot_2016-07-28-14-44-01_com.gc.weather.png" width="360" height="640" alt="主界面" align="center"></p>
+<a id="more"></a>
+<p>开启我们的项目，首先启动<code>Android Studio</code>建立一个工程，在<code>build.gradle</code>添加如下信息：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex:rxjava:1.1.0'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex:rxandroid:1.1.0'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.google.code.gson:gson:2.6.2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.picasso:picasso:2.5.2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:retrofit:2.0.0-beta4'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:converter-gson:2.0.0-beta4'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.okhttp3:okhttp:3.4.1'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.yalantis:phoenix:1.2.3'</span></div></pre></td></tr></table></figure>
+<p>ps:<code>Picasso</code>原本是用不上的，不过还是手贱添加了依赖，后面比较牵强地用上了，实际在此项目中并无明显作用</p>
+<p>然后我们来定义一个接口<code>NetService</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">NetService</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Headers</span>(<span class="string">"apikey:a77bae703557e5884b6873af93b603d1"</span>)</div><div class="line">    <span class="meta">@GET</span>(<span class="string">"/apistore/weatherservice/recentweathers"</span>)</div><div class="line">    Observable&lt;Result&lt;Data&gt;&gt; getWeather(<span class="meta">@Query</span>(<span class="string">"cityname"</span>) String cityName, <span class="meta">@Query</span>(<span class="string">"cityid"</span>) String cityId);</div><div class="line"></div><div class="line">    <span class="meta">@Headers</span>(<span class="string">"apikey:a77bae703557e5884b6873af93b603d1"</span>)</div><div class="line">    <span class="meta">@GET</span>(<span class="string">"/apistore/weatherservice/citylist"</span>)</div><div class="line">    Observable&lt;Result&lt;List&lt;City&gt;&gt;&gt; getCity(<span class="meta">@Query</span>(<span class="string">"cityname"</span>) String cityName);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ps:代码中的<code>Observable</code>类是属于<code>RxJava</code>中的，返回的结果集是实体类，具体声明依实际项目需要，此处解析的实体类可参考文末源码中的定义。</p>
+<p>接着配置一下<code>Application</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Context context;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> OkHttpClient client;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Retrofit retrofit;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> NetService service;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">long</span> READ_TIME_OUT = <span class="number">8000</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String BASEURL = <span class="string">"http://apis.baidu.com"</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate();</div><div class="line">        context = getApplicationContext();</div><div class="line">        initHttpClient();</div><div class="line">        initRetrofit();</div><div class="line">        initNetService();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initHttpClient</span><span class="params">()</span> </span>&#123;</div><div class="line">        client = <span class="keyword">new</span> OkHttpClient.Builder()</div><div class="line">                .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)</div><div class="line">                .build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initRetrofit</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (retrofit == <span class="keyword">null</span>) &#123;</div><div class="line">            retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">                    .baseUrl(BASEURL)</div><div class="line">                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</div><div class="line">                    .addConverterFactory(GsonConverterFactory.create())</div><div class="line">                    .client(client)</div><div class="line">                    .build();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initNetService</span><span class="params">()</span> </span>&#123;</div><div class="line">        service = retrofit.create(NetService.class);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> context;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> OkHttpClient <span class="title">getHttpClient</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> client;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Retrofit <span class="title">getRetrofit</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> retrofit;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> NetService <span class="title">getService</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> service;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ps:记得在<code>AndroidManifest.xml</code>文件中配置<code>Application</code>标签，增加<code>android:name</code>属性</p>
+<p>开始首页的界面布局就一个<code>ViewPager</code>，每添加一个城市，就往<code>ViewPager</code>里添加一个<code>Fragment</code>。此处使用的<code>PagerAdapter</code>是<code>FragmentStatePagerAdapter</code>，为什么不用<code>FragmentPagerAdapter</code>呢？因为要动态管理城市的天气信息，若使用<code>FragmentPagerAdapter</code>,在删除城市时，页面依然保留在内存中，并没有完全从<code>ViewPager</code>中移除，会造成不好的用户体验，但使用<code>FragmentStatePagerAdapter</code>会造成性能上的损失，在更新城市列表时会有一定的延时，目前还没有好的解决方式，有兴趣的读者可去搜索一下两者的区别。具体代码如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">android.support.v4.view.ViewPager</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/id_weather_page"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.v4.view.ViewPager</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><code>ViewPager</code>的Adapter如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimplePagerAdapter</span> <span class="keyword">extends</span> <span class="title">FragmentStatePagerAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> List&lt;Fragment&gt; fragments;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SimplePagerAdapter</span><span class="params">(FragmentManager fm, List&lt;Fragment&gt; fragments)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(fm);</div><div class="line">        <span class="keyword">this</span>.fragments = fragments;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> fragments.get(position);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> fragments.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemPosition</span><span class="params">(Object object)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> PagerAdapter.POSITION_NONE;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>MainActivity</code>代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">BaseActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> ViewPager mWeatherPager;</div><div class="line">    <span class="keyword">private</span> SimplePagerAdapter mAdapter;</div><div class="line">    <span class="keyword">private</span> List&lt;Fragment&gt; mFragments;</div><div class="line">    <span class="keyword">private</span> ArrayList&lt;City&gt; cityList;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> MainActivity instance;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        instance = <span class="keyword">this</span>;</div><div class="line">        mWeatherPager = (ViewPager) findViewById(R.id.id_weather_page);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">fetchData</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            cityList = (ArrayList&lt;City&gt;) SerializeUtil.getObject(<span class="keyword">this</span>, <span class="string">"cities"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span> (cityList == <span class="keyword">null</span> || cityList.size() &lt;= <span class="number">0</span>) &#123;</div><div class="line">                cityList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">                City city = <span class="keyword">new</span> City();</div><div class="line">                city.setProvince_cn(getString(R.string.default_province_cn));</div><div class="line">                city.setDistrict_cn(getString(R.string.default_district_cn));</div><div class="line">                city.setName_cn(getString(R.string.default_name_cn));</div><div class="line">                city.setName_en(getString(R.string.default_name_en));</div><div class="line">                city.setArea_id(getString(R.string.default_area_id));</div><div class="line">                cityList.add(city);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        mFragments = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        <span class="keyword">for</span> (City city : cityList) &#123;</div><div class="line">            mFragments.add(WeatherFragment.newInstance(city.getName_cn(), city.getArea_id()));</div><div class="line">        &#125;</div><div class="line">        mAdapter = <span class="keyword">new</span> SimplePagerAdapter(getSupportFragmentManager(), mFragments);</div><div class="line">        mWeatherPager.setAdapter(mAdapter);</div><div class="line">        mWeatherPager.setOffscreenPageLimit(mFragments.size() - <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);</div><div class="line">        <span class="keyword">if</span> (resultCode == RESULT_OK) &#123;</div><div class="line">            ArrayList&lt;City&gt; cities = (ArrayList&lt;City&gt;) data.getExtras().getSerializable(<span class="string">"cities"</span>);</div><div class="line">            <span class="keyword">if</span> (cities.size() == <span class="number">0</span>)&#123;  </div><div class="line">                City city = <span class="keyword">new</span> City();</div><div class="line">                city.setProvince_cn(getString(R.string.default_province_cn));</div><div class="line">                city.setDistrict_cn(getString(R.string.default_district_cn));</div><div class="line">                city.setName_cn(getString(R.string.default_name_cn));</div><div class="line">                city.setName_en(getString(R.string.default_name_en));</div><div class="line">                city.setArea_id(getString(R.string.default_area_id));</div><div class="line">                cities.add(city);</div><div class="line">	    &#125;</div><div class="line">	    cityList.clear();</div><div class="line">	    cityList.addAll(cities);</div><div class="line">            mFragments.clear();</div><div class="line">            <span class="keyword">for</span> (City city : cityList) &#123;</div><div class="line">                mFragments.add(WeatherFragment.newInstance(city.getName_cn(), city.getArea_id()));</div><div class="line">            &#125;</div><div class="line">            mAdapter.notifyDataSetChanged();</div><div class="line">            mWeatherPager.setOffscreenPageLimit(mFragments.size() - <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            SerializeUtil.saveObject(<span class="keyword">this</span>, cityList, <span class="string">"cities"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;City&gt; <span class="title">getCityList</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> cityList;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>此处用到序列化操作，把每次获取的数据在退出应用时进行保存，由于城市的ID是唯一的，故保存的文件名为城市名，序列化的具体代码可参考源码。此处启动<strong>Activity</strong>的方式采用<code>startActivityForResult</code>的方式，具体启动在<code>Fragment</code>里实现，应注意使用的是<code>getActivity().startActivityForResult(requestCode,intent)</code>,这样返回的结果将会在<code>Fragment</code>依附的<strong>Activity</strong>即<code>MainActivity</code>里进行处理。</p>
+<hr>
+<p>说了怎么多，重点来了，就是我们的<code>WeatherFragment</code>，对于<strong>Fragment</strong>,编译器是不推荐我们直接new一个<strong>Fragment</strong>，而是让我们自己实现<code>newInstance</code>的方法，并在方法里实现<code>setArguments()</code>方法，具体如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> WeatherFragment <span class="title">newInstance</span><span class="params">(String cityName, String cityId)</span> </span>&#123;</div><div class="line">    WeatherFragment fragment = <span class="keyword">new</span> WeatherFragment();</div><div class="line">    Bundle args = <span class="keyword">new</span> Bundle();</div><div class="line">    args.putString(<span class="string">"city_name"</span>, cityName);</div><div class="line">    args.putString(<span class="string">"city_id"</span>, cityId);</div><div class="line">    fragment.setArguments(args);</div><div class="line">    <span class="keyword">return</span> fragment;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后在<code>onCreate()</code>里获取参数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">    cityName = getArguments().getString(<span class="string">"city_name"</span>);</div><div class="line">    cityId = getArguments().getString(<span class="string">"city_id"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>省略<strong>View</strong>的初始化过程，具体查看源码，看重点的方法<code>fetchData()</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fetchData</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        Data data = (Data) SerializeUtil.getObject(getActivity(), cityId);</div><div class="line">        <span class="keyword">if</span> (data != <span class="keyword">null</span>) &#123;</div><div class="line">            setData(data);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (!ConnUtil.isNetConnected(getActivity())) &#123;</div><div class="line">        <span class="keyword">new</span> Handler().postDelayed(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                refreshView.setRefreshing(<span class="keyword">false</span>);</div><div class="line">                Snackbar.make(indexLayout, getString(R.string.net_error), Snackbar.LENGTH_LONG)</div><div class="line">                        .setAction(getString(R.string.setting), <span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">                            <span class="meta">@Override</span></div><div class="line">                            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                                startActivity(<span class="keyword">new</span> Intent(Settings.ACTION_WIRELESS_SETTINGS));</div><div class="line">                            &#125;</div><div class="line">                        &#125;).show();</div><div class="line">            &#125;</div><div class="line">        &#125;, <span class="number">1000</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    BaseApplication.getService().getWeather(cityName, cityId)</div><div class="line">            .subscribeOn(Schedulers.io())</div><div class="line">            .observeOn(AndroidSchedulers.mainThread())</div><div class="line">            .map(<span class="keyword">new</span> Func1&lt;Result&lt;Data&gt;, Data&gt;() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> Data <span class="title">call</span><span class="params">(Result&lt;Data&gt; dataResult)</span> </span>&#123;</div><div class="line">                    <span class="keyword">if</span> (dataResult == <span class="keyword">null</span> || dataResult.getErrNum() != <span class="number">0</span>) &#123;</div><div class="line">                        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">return</span> dataResult.getRetData();</div><div class="line">                &#125;</div><div class="line">            &#125;)</div><div class="line">            .subscribe(<span class="keyword">new</span> Action1&lt;Data&gt;() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Data data)</span> </span>&#123;</div><div class="line">		    refreshView.setRefreshing(<span class="keyword">false</span>);</div><div class="line">                    <span class="keyword">if</span> (data == <span class="keyword">null</span>) &#123;</div><div class="line">                        SnackbarUtil.show(indexLayout, getString(R.string.data_error));</div><div class="line">                        <span class="keyword">return</span>;</div><div class="line">                    &#125;</div><div class="line">                    setData(data);</div><div class="line">                    SnackbarUtil.show(indexLayout, getString(R.string.data_success));</div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        SerializeUtil.saveObject(getActivity(), data, cityId);</div><div class="line">                    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                        e.printStackTrace();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>逻辑比较简单，先是从文件中获取数据展示到界面上，<code>setData()</code>方法是将数据与<strong>View</strong>绑定，接着判断是否连接网络，若无网络弹出提示并结束，否则从网络获取数据。<code>subscribeOn()</code>和<code>observeOn()</code>分别用于切换线程。</p>
+<p><a href="https://github.com/codepet/weather.info" target="_blank" rel="external">源码地址</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开源项目/" rel="tag">#开源项目</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/28/android-common-util/" rel="prev" title="Android开发中常用的工具类">
+                Android开发中常用的工具类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/head.jpeg"
+               alt="codepet" />
+          <p class="site-author-name" itemprop="name">codepet</p>
+          <p class="site-description motion-element" itemprop="description">追求卓越，成功会出其不意地上门</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="feed-link motion-element" style="background-color: rgb(56,183,234);">
+                  <a style="color: white;" href='javascript:(
+      												function go() {
+      													function c() {
+      														var e = document.createElement("link");
+      														e.setAttribute("type", "text/css");
+      														e.setAttribute("rel", "stylesheet");
+      														e.setAttribute("href", f);
+      														e.setAttribute("class", l);
+      														document.body.appendChild(e)    }
+      													function h() {
+      														var e = document.getElementsByClassName(l);
+      														for (var t = 0; t < e.length; t++) {
+      															document.body.removeChild(e[t])
+      															}
+      													}
+      													function p() {
+      														var e = document.createElement("div");
+      														e.setAttribute("class", a);
+      														document.body.appendChild(e);
+      														setTimeout(function() {
+      															document.body.removeChild(e)
+      														}, 100)
+      													}
+      													function d(e) {
+      														return {
+      															height : e.offsetHeight,
+      															width : e.offsetWidth
+      														}
+      													}
+      													function v(i) {
+      														var s = d(i);
+      														return s.height > e && s.height < n && s.width > t && s.width < r
+      													}
+      													function m(e) {
+      														var t = e;
+      														var n = 0;
+      														while (!!t) {
+      															n += t.offsetTop;
+      															t = t.offsetParent
+      														}
+      														return n
+      													}
+      													function g() {
+      														var e = document.documentElement;
+      														if (!!window.innerWidth) {
+      															return window.innerHeight
+      														} else if (e && !isNaN(e.clientHeight)) {
+      															return e.clientHeight
+      														}
+      														return 0
+      													}
+      													function y() {
+      														if (window.pageYOffset) {
+      															return window.pageYOffset
+      														}
+      														return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+      													}
+      													function E(e) {
+      														var t = m(e);
+      														return t >= w && t <= b + w
+      													}
+      													var songs = [ "http://7xs0af.com1.z0.glb.clouddn.com/High-Die-Young.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-I-Want-You-to-Know.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-Summer-Vibe.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-Viva-La-Vida.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-Wake.mp3"];
+      													function S() {
+      														var e = document.getElementById("audio_element_id");
+      														if(e != null){
+      															var index = parseInt(e.getAttribute("curSongIndex"));
+      															if(index > songs.length - 2) {
+      																index = 0;
+      															} else {
+      																index++;
+      															}
+      															e.setAttribute("curSongIndex", index);
+      															N();
+      														}
+      														e.src = i;
+      														e.play()
+      													}
+      													function x(e) {
+      														e.className += " " + s + " " + o
+      													}
+      													function T(e) {
+      														e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+      													}
+      													function N() {
+      														var e = document.getElementsByClassName(s);
+      														var t = new RegExp("\\b" + s + "\\b");
+      														for (var n = 0; n < e.length; ) {
+      															e[n].className = e[n].className.replace(t, "")
+      														}
+      													}
+      													function initAudioEle() {
+      														var e = document.getElementById("audio_element_id");
+      														if(e === null){
+      															e = document.createElement("audio");
+      															e.setAttribute("class", l);
+      															e.setAttribute("curSongIndex", 0);
+      															e.id = "audio_element_id";
+      															e.loop = false;
+      															e.bgcolor = 0;
+      															e.addEventListener("canplay", function() {
+      																setTimeout(function() {
+      																	x(k)
+      																}, 500);
+      																setTimeout(function() {
+      																	N();
+      																	p();
+      																	for (var e = 0; e < O.length; e++) {
+      																		T(O[e])
+      																	}
+      																}, 15500)
+      															}, true);
+      															e.addEventListener("ended", function() {
+      																N();
+      																h();
+      																go();
+      															}, true);
+      															e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+      															document.body.appendChild(e);
+      														}
+      													}
+      													initAudioEle();
+      													var e = 30;
+      													var t = 30;
+      													var n = 350;
+      													var r = 350;
+      													var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+      													var i = songs[curSongIndex];
+      													var s = "mw-harlem_shake_me";
+      													var o = "im_first";
+      													var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+      													var a = "mw-strobe_light";
+      													var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+      													var l = "mw_added_css";
+                                var b = g();
+      													var w = y();
+      													var C = document.getElementsByTagName("*");
+      													var k = null;
+      													for (var L = 0; L < C.length; L++) {
+      														var A = C[L];
+      														if (v(A)) {
+      															if (E(A)) {
+      																k = A;
+      																break
+      															}
+      														}
+      													}
+      													if (A === null) {
+      														console.warn("Could not find a node of the right size. Please try a different page.");
+      														return
+      													}
+      													c();
+      													S();
+      													var O = [];
+      													for (var L = 0; L < C.length; L++) {
+      														var A = C[L];
+      														if (v(A)) {
+      															O.push(A)
+      														}
+      													}
+      												})()'>
+                    High一下
+                  </a>
+                </div>
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">codepet</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

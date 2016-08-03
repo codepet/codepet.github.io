@@ -1,0 +1,800 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试相关," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="GC是什么? 为什么要有GC?GC是垃圾收集的意思（Gabage Collection）,内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，Java语言没有提供释放已分配内存的显示操作方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础面试题--其他">
+<meta property="og:url" content="https://codepet.github.io/2016/08/01/java-basic-issue-02/index.html">
+<meta property="og:site_name" content="Codepet's Blog">
+<meta property="og:description" content="GC是什么? 为什么要有GC?GC是垃圾收集的意思（Gabage Collection）,内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，Java语言没有提供释放已分配内存的显示操作方法。">
+<meta property="og:updated_time" content="2016-08-03T11:12:10.607Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础面试题--其他">
+<meta name="twitter:description" content="GC是什么? 为什么要有GC?GC是垃圾收集的意思（Gabage Collection）,内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，Java语言没有提供释放已分配内存的显示操作方法。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://codepet.github.io/2016/08/01/java-basic-issue-02/"/>
+
+  <title> Java基础面试题--其他 | Codepet's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Codepet's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Learn and live</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java基础面试题--其他
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-01T11:55:46+08:00" content="2016-08-01">
+              2016-08-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="GC是什么-为什么要有GC"><a href="#GC是什么-为什么要有GC" class="headerlink" title="GC是什么? 为什么要有GC?"></a>GC是什么? 为什么要有GC?</h3><p>GC是垃圾收集的意思（Gabage Collection）,内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，Java语言没有提供释放已分配内存的显示操作方法。<br><a id="more"></a></p>
+<hr>
+<h3 id="final-finally-finalize的区别。"><a href="#final-finally-finalize的区别。" class="headerlink" title="final, finally, finalize的区别。"></a>final, finally, finalize的区别。</h3><p>final 用于声明属性，方法和类，分别表示属性不可变，方法不可覆盖，类不可继承。<br>finally是异常处理语句结构的一部分，表示总是执行。<br>finalize是Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，可以覆盖此方法提供垃圾收集时的其他资源回收，例如关闭文件等。</p>
+<hr>
+<h3 id="编程题-用最有效率的方法算出2乘以8等於几"><a href="#编程题-用最有效率的方法算出2乘以8等於几" class="headerlink" title="编程题: 用最有效率的方法算出2乘以8等於几?"></a>编程题: 用最有效率的方法算出2乘以8等於几?</h3><p>2 &lt;&lt; 3</p>
+<hr>
+<h3 id="当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递"><a href="#当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递" class="headerlink" title="当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递?"></a>当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递?</h3><p>是值传递。Java 编程语言只有值传递参数。当一个对象实例作为一个参数被传递到方法中时，参数的值就是对该对象的引用。对象的内容可以在被调用的方法中改变，但对象的引用是永远不会改变的。</p>
+<hr>
+<h3 id="垃圾回收的优点和原理。并考虑2种回收机制。"><a href="#垃圾回收的优点和原理。并考虑2种回收机制。" class="headerlink" title="垃圾回收的优点和原理。并考虑2种回收机制。"></a>垃圾回收的优点和原理。并考虑2种回收机制。</h3><p>Java语言中一个显著的特点就是引入了垃圾回收机制，使c++程序员最头疼的内存管理的问题迎刃而解，它使得Java程序员在编写程序的时候不再需要考虑内存管理。由于有个垃圾回收机制，Java中的对象不再有“作用域”的概念，只有对象的引用才有“作用域”。垃圾回收可以有效的防止内存泄露，有效的使用可以使用的内存。垃圾回收器通常是作为一个单独的低级别的线程运行，不可预知的情况下对内存堆中已经死亡的或者长时间没有使用的对象进行清楚和回收，程序员不能实时的调用垃圾回收器对某个对象或所有对象进行垃圾回收。回收机制有分代复制垃圾回收和标记垃圾回收，增量垃圾回收。</p>
+<hr>
+<h3 id="描述一下JVM加载class文件的原理机制"><a href="#描述一下JVM加载class文件的原理机制" class="headerlink" title="描述一下JVM加载class文件的原理机制?"></a>描述一下JVM加载class文件的原理机制?</h3><p>JVM中类的装载是由ClassLoader和它的子类来实现的,Java ClassLoader 是一个重要的Java运行时系统组件。它负责在运行时查找和装入类文件的类。</p>
+<hr>
+<h3 id="XML文档定义有几种形式？它们之间有何本质区别？解析XML文档有哪几种方式？"><a href="#XML文档定义有几种形式？它们之间有何本质区别？解析XML文档有哪几种方式？" class="headerlink" title="XML文档定义有几种形式？它们之间有何本质区别？解析XML文档有哪几种方式？"></a>XML文档定义有几种形式？它们之间有何本质区别？解析XML文档有哪几种方式？</h3><p>a: 两种形式 dtd schema，<br>b: 本质区别:schema本身是xml的，可以被XML解析器解析(这也是从DTD上发展schema的根本目的)，<br>c:有DOM,SAX,STAX等<br>DOM:处理大型文件时其性能下降的非常厉害。这个问题是由DOM的树结构所造成的，这种结构占用的内存较多，而且DOM必须在解析文件之前把整个文档装入内存,适合对XML的随机访问<br>SAX:不现于DOM,SAX是事件驱动型的XML解析方式。它顺序读取XML文件，不需要一次全部装载整个文件。当遇到像文件开头，文档结束，或者标签开头与标签结束时，它会触发一个事件，用户通过在其回调事件中写入处理代码来处理XML文件，适合对XML的顺序访问<br>STAX:Streaming API for XML (StAX)</p>
+<hr>
+<h3 id="常用的设计模式？"><a href="#常用的设计模式？" class="headerlink" title="常用的设计模式？"></a>常用的设计模式？</h3><p>Java中的23种设计模式：<br>Factory（工厂模式）<br>Builder（建造模式）<br>Factory Method（工厂方法模式）<br>Prototype（原始模型模式）<br>Singleton（单例模式）<br>Facade（门面模式）<br>Adapter（适配器模式）<br>Bridge（桥梁模式）<br>Composite（合成模式）<br>Decorator（装饰模式）<br>Flyweight（享元模式）<br>Proxy（代理模式）<br>Command（命令模式）<br>Interpreter（解释器模式）<br>Visitor（访问者模式）<br>Iterator（迭代子模式）<br>Mediator（调停者模式）<br>Memento（备忘录模式）<br>Observer（观察者模式）<br>State（状态模式）<br>Strategy（策略模式）<br>Template Method（模板方法模式）<br>Chain Of Responsibleity（责任链模式）</p>
+<hr>
+<h3 id="排序都有哪几种方法？"><a href="#排序都有哪几种方法？" class="headerlink" title="排序都有哪几种方法？"></a>排序都有哪几种方法？</h3><p>排序的方法有：插入排序（直接插入排序、希尔排序），交换排序（冒泡排序、快速排序），选择排序（直接选择排序、堆排序），归并排序，分配排序（箱排序、基数排序）</p>
+<hr>
+<h3 id="java中有几种类型的流？JDK为每种类型的流提供了一些抽象类以供继承，请说出他们分别是哪些类？"><a href="#java中有几种类型的流？JDK为每种类型的流提供了一些抽象类以供继承，请说出他们分别是哪些类？" class="headerlink" title="java中有几种类型的流？JDK为每种类型的流提供了一些抽象类以供继承，请说出他们分别是哪些类？"></a>java中有几种类型的流？JDK为每种类型的流提供了一些抽象类以供继承，请说出他们分别是哪些类？</h3><p>字节流，字符流。字节流继承于InputStream OutputStream，字符流继承于InputStreamReader OutputStreamWriter。在java.io包中还有许多其他的流，主要是为了提高性能和使用方便。</p>
+<h3 id="什么时候用assert。"><a href="#什么时候用assert。" class="headerlink" title="什么时候用assert。"></a>什么时候用assert。</h3><p>assertion(断言)在软件开发中是一种常用的调试方式，很多开发语言中都支持这种机制。在实现中，assertion就是在程序中的一条语句，它对一个boolean表达式进行检查，一个正确程序必须保证这个boolean表达式的值为true；如果该值为false，说明程序已经处于不正确的状态下，系统将给出警告或退出。一般来说，assertion用于保证程序最基本、关键的正确性。assertion检查通常在开发和测试时开启。为了提高性能，在软件发布后，assertion检查通常是关闭的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试相关/" rel="tag">#面试相关</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/01/java-basic-issue-01/" rel="next" title="Java基础面试题--面向对象相关">
+                <i class="fa fa-chevron-left"></i> Java基础面试题--面向对象相关
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/01/android-invalidate-note/" rel="prev" title="Android笔记:invalidate()和postInvalidate() 的区别及使用">
+                Android笔记:invalidate()和postInvalidate() 的区别及使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/head.jpeg"
+               alt="codepet" />
+          <p class="site-author-name" itemprop="name">codepet</p>
+          <p class="site-description motion-element" itemprop="description">追求卓越，成功会出其不意地上门</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="feed-link motion-element" style="background-color: rgb(56,183,234);">
+                  <a style="color: white;" href='javascript:(
+      												function go() {
+      													function c() {
+      														var e = document.createElement("link");
+      														e.setAttribute("type", "text/css");
+      														e.setAttribute("rel", "stylesheet");
+      														e.setAttribute("href", f);
+      														e.setAttribute("class", l);
+      														document.body.appendChild(e)    }
+      													function h() {
+      														var e = document.getElementsByClassName(l);
+      														for (var t = 0; t < e.length; t++) {
+      															document.body.removeChild(e[t])
+      															}
+      													}
+      													function p() {
+      														var e = document.createElement("div");
+      														e.setAttribute("class", a);
+      														document.body.appendChild(e);
+      														setTimeout(function() {
+      															document.body.removeChild(e)
+      														}, 100)
+      													}
+      													function d(e) {
+      														return {
+      															height : e.offsetHeight,
+      															width : e.offsetWidth
+      														}
+      													}
+      													function v(i) {
+      														var s = d(i);
+      														return s.height > e && s.height < n && s.width > t && s.width < r
+      													}
+      													function m(e) {
+      														var t = e;
+      														var n = 0;
+      														while (!!t) {
+      															n += t.offsetTop;
+      															t = t.offsetParent
+      														}
+      														return n
+      													}
+      													function g() {
+      														var e = document.documentElement;
+      														if (!!window.innerWidth) {
+      															return window.innerHeight
+      														} else if (e && !isNaN(e.clientHeight)) {
+      															return e.clientHeight
+      														}
+      														return 0
+      													}
+      													function y() {
+      														if (window.pageYOffset) {
+      															return window.pageYOffset
+      														}
+      														return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+      													}
+      													function E(e) {
+      														var t = m(e);
+      														return t >= w && t <= b + w
+      													}
+      													var songs = [ "http://7xs0af.com1.z0.glb.clouddn.com/High-Die-Young.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-I-Want-You-to-Know.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-Summer-Vibe.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-Viva-La-Vida.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-Wake.mp3"];
+      													function S() {
+      														var e = document.getElementById("audio_element_id");
+      														if(e != null){
+      															var index = parseInt(e.getAttribute("curSongIndex"));
+      															if(index > songs.length - 2) {
+      																index = 0;
+      															} else {
+      																index++;
+      															}
+      															e.setAttribute("curSongIndex", index);
+      															N();
+      														}
+      														e.src = i;
+      														e.play()
+      													}
+      													function x(e) {
+      														e.className += " " + s + " " + o
+      													}
+      													function T(e) {
+      														e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+      													}
+      													function N() {
+      														var e = document.getElementsByClassName(s);
+      														var t = new RegExp("\\b" + s + "\\b");
+      														for (var n = 0; n < e.length; ) {
+      															e[n].className = e[n].className.replace(t, "")
+      														}
+      													}
+      													function initAudioEle() {
+      														var e = document.getElementById("audio_element_id");
+      														if(e === null){
+      															e = document.createElement("audio");
+      															e.setAttribute("class", l);
+      															e.setAttribute("curSongIndex", 0);
+      															e.id = "audio_element_id";
+      															e.loop = false;
+      															e.bgcolor = 0;
+      															e.addEventListener("canplay", function() {
+      																setTimeout(function() {
+      																	x(k)
+      																}, 500);
+      																setTimeout(function() {
+      																	N();
+      																	p();
+      																	for (var e = 0; e < O.length; e++) {
+      																		T(O[e])
+      																	}
+      																}, 15500)
+      															}, true);
+      															e.addEventListener("ended", function() {
+      																N();
+      																h();
+      																go();
+      															}, true);
+      															e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+      															document.body.appendChild(e);
+      														}
+      													}
+      													initAudioEle();
+      													var e = 30;
+      													var t = 30;
+      													var n = 350;
+      													var r = 350;
+      													var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+      													var i = songs[curSongIndex];
+      													var s = "mw-harlem_shake_me";
+      													var o = "im_first";
+      													var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+      													var a = "mw-strobe_light";
+      													var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+      													var l = "mw_added_css";
+                                var b = g();
+      													var w = y();
+      													var C = document.getElementsByTagName("*");
+      													var k = null;
+      													for (var L = 0; L < C.length; L++) {
+      														var A = C[L];
+      														if (v(A)) {
+      															if (E(A)) {
+      																k = A;
+      																break
+      															}
+      														}
+      													}
+      													if (A === null) {
+      														console.warn("Could not find a node of the right size. Please try a different page.");
+      														return
+      													}
+      													c();
+      													S();
+      													var O = [];
+      													for (var L = 0; L < C.length; L++) {
+      														var A = C[L];
+      														if (v(A)) {
+      															O.push(A)
+      														}
+      													}
+      												})()'>
+                    High一下
+                  </a>
+                </div>
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GC是什么-为什么要有GC"><span class="nav-number">1.</span> <span class="nav-text">GC是什么? 为什么要有GC?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final-finally-finalize的区别。"><span class="nav-number">2.</span> <span class="nav-text">final, finally, finalize的区别。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程题-用最有效率的方法算出2乘以8等於几"><span class="nav-number">3.</span> <span class="nav-text">编程题: 用最有效率的方法算出2乘以8等於几?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递"><span class="nav-number">4.</span> <span class="nav-text">当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收的优点和原理。并考虑2种回收机制。"><span class="nav-number">5.</span> <span class="nav-text">垃圾回收的优点和原理。并考虑2种回收机制。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#描述一下JVM加载class文件的原理机制"><span class="nav-number">6.</span> <span class="nav-text">描述一下JVM加载class文件的原理机制?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML文档定义有几种形式？它们之间有何本质区别？解析XML文档有哪几种方式？"><span class="nav-number">7.</span> <span class="nav-text">XML文档定义有几种形式？它们之间有何本质区别？解析XML文档有哪几种方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的设计模式？"><span class="nav-number">8.</span> <span class="nav-text">常用的设计模式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序都有哪几种方法？"><span class="nav-number">9.</span> <span class="nav-text">排序都有哪几种方法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java中有几种类型的流？JDK为每种类型的流提供了一些抽象类以供继承，请说出他们分别是哪些类？"><span class="nav-number">10.</span> <span class="nav-text">java中有几种类型的流？JDK为每种类型的流提供了一些抽象类以供继承，请说出他们分别是哪些类？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候用assert。"><span class="nav-number">11.</span> <span class="nav-text">什么时候用assert。</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">codepet</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,785 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="工具类," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="获取手机中音乐列表12345678910111213141516171819202122232425262728293031323334353637/** * 用于从数据库中查询歌曲的信息，保存在List当中 */public static List&amp;lt;Mp3Infos&amp;gt; getMp3Infos(Context context) &amp;#123;    Cursor cursor = con">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ContentProvider的使用">
+<meta property="og:url" content="https://codepet.github.io/2016/07/29/android-contentprovider-util/index.html">
+<meta property="og:site_name" content="Codepet's Blog">
+<meta property="og:description" content="获取手机中音乐列表12345678910111213141516171819202122232425262728293031323334353637/** * 用于从数据库中查询歌曲的信息，保存在List当中 */public static List&amp;lt;Mp3Infos&amp;gt; getMp3Infos(Context context) &amp;#123;    Cursor cursor = con">
+<meta property="og:updated_time" content="2016-08-03T11:08:12.203Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ContentProvider的使用">
+<meta name="twitter:description" content="获取手机中音乐列表12345678910111213141516171819202122232425262728293031323334353637/** * 用于从数据库中查询歌曲的信息，保存在List当中 */public static List&amp;lt;Mp3Infos&amp;gt; getMp3Infos(Context context) &amp;#123;    Cursor cursor = con">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://codepet.github.io/2016/07/29/android-contentprovider-util/"/>
+
+  <title> ContentProvider的使用 | Codepet's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Codepet's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Learn and live</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ContentProvider的使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-29T14:45:23+08:00" content="2016-07-29">
+              2016-07-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="获取手机中音乐列表"><a href="#获取手机中音乐列表" class="headerlink" title="获取手机中音乐列表"></a>获取手机中音乐列表</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 用于从数据库中查询歌曲的信息，保存在List当中</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Mp3Infos&gt; <span class="title">getMp3Infos</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">    Cursor cursor = context.getContentResolver().query(</div><div class="line">            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>,</div><div class="line">            MediaStore.Audio.Media.DEFAULT_SORT_ORDER);</div><div class="line">    List&lt;Mp3Infos&gt; mp3Infos = <span class="keyword">new</span> ArrayList&lt;Mp3Infos&gt;();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cursor.getCount(); i++) &#123;</div><div class="line">        Mp3Infos mp3Info = <span class="keyword">new</span> Mp3Infos();</div><div class="line">        cursor.moveToNext();</div><div class="line">        <span class="keyword">long</span> id = cursor.getLong(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media._ID)); <span class="comment">// 音乐id</span></div><div class="line">        String title = cursor.getString((cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.TITLE)));<span class="comment">// 音乐标题</span></div><div class="line">        String artist = cursor.getString(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.ARTIST));<span class="comment">// 艺术家</span></div><div class="line">        <span class="keyword">long</span> duration = cursor.getLong(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.DURATION));<span class="comment">// 时长</span></div><div class="line">        <span class="keyword">long</span> size = cursor.getLong(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.SIZE)); <span class="comment">// 文件大小</span></div><div class="line">        String url = cursor.getString(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.DATA)); <span class="comment">// 文件路径</span></div><div class="line">        <span class="keyword">int</span> isMusic = cursor.getInt(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.IS_MUSIC));<span class="comment">// 是否为音乐</span></div><div class="line">        <span class="keyword">if</span> (isMusic != <span class="number">0</span>) &#123; <span class="comment">// 只把音乐添加到集合当中</span></div><div class="line">            mp3Info.setId(id);</div><div class="line">            mp3Info.setTitle(title);</div><div class="line">            mp3Info.setArtist(artist);</div><div class="line">            mp3Info.setDuration(duration);</div><div class="line">            mp3Info.setSize(size);</div><div class="line">            mp3Info.setPath(url);</div><div class="line">            mp3Infos.add(mp3Info);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> mp3Infos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>其中<code>Mp3Infos</code>如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mp3Infos</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id; <span class="comment">// 音乐id</span></div><div class="line">    <span class="keyword">private</span> String title;<span class="comment">// 音乐标题</span></div><div class="line">    <span class="keyword">private</span> String artist;<span class="comment">// 艺术家</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> duration;<span class="comment">// 时长</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> size;<span class="comment">// 文件大小</span></div><div class="line">    <span class="keyword">private</span> String path;<span class="comment">// 文件路径</span></div><div class="line"></div><div class="line">    <span class="comment">// 省略setter和getter方法...</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="获取系统联系人"><a href="#获取系统联系人" class="headerlink" title="获取系统联系人"></a>获取系统联系人</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContactUtils</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] PHONE_PROJECTION = <span class="keyword">new</span> String[] &#123;</div><div class="line">            Phone.DISPLAY_NAME, Phone.NUMBER, Phone.PHOTO_ID, Phone.CONTACT_ID &#125;;</div><div class="line">    <span class="keyword">private</span> Context context;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 联系人显示名称</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PHONES_DISPLAYNAME_INDEX = <span class="number">0</span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 电话号码</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PHONES_NUMBER_INDEX = <span class="number">1</span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 头像ID</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PHONES_PHOTO_ID_INDEX = <span class="number">2</span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 联系人的ID</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PHONES_CONTACT_ID_INDEX = <span class="number">3</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ContactUtils</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.context = context;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获得手机通讯录联系人</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> context</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Contact&gt; <span class="title">getPhoneContact</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;Contact&gt; mContactsList = <span class="keyword">new</span> ArrayList&lt;Contact&gt;();</div><div class="line">        ContentResolver resolver = context.getContentResolver();</div><div class="line">        Cursor phoneCursor = resolver.query(Phone.CONTENT_URI,</div><div class="line">                PHONE_PROJECTION, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">        <span class="keyword">if</span> (phoneCursor != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">while</span> (phoneCursor.moveToNext()) &#123;</div><div class="line">                <span class="comment">// 得到手机号码</span></div><div class="line">                String phoneNumber = phoneCursor.getString(PHONES_NUMBER_INDEX);</div><div class="line">                <span class="comment">// 当手机号码为空时，跳过当前循环</span></div><div class="line">                <span class="keyword">if</span> (TextUtils.isEmpty(phoneNumber)) &#123;</div><div class="line">                    <span class="keyword">continue</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//得到联系人名称</span></div><div class="line">                String contactName = phoneCursor</div><div class="line">                        .getString(PHONES_DISPLAYNAME_INDEX);</div><div class="line">                <span class="comment">//得到联系人ID</span></div><div class="line">                Long contactId = phoneCursor.getLong(PHONES_CONTACT_ID_INDEX);</div><div class="line">                <span class="comment">//获得联系人头像ID</span></div><div class="line">                Long photoId = phoneCursor.getLong(PHONES_PHOTO_ID_INDEX);</div><div class="line">                <span class="comment">//得到联系人头像Bitmap</span></div><div class="line">                Bitmap contactPhoto = <span class="keyword">null</span>;</div><div class="line">                <span class="comment">//如果photoId 大于0，表示联系人有头像，如果没有，给此人设置默认头像</span></div><div class="line">                <span class="keyword">if</span> (photoId &gt; <span class="number">0</span>) &#123;</div><div class="line">                    Uri uri = ContentUris.withAppendedId(</div><div class="line">                            ContactsContract.Contacts.CONTENT_URI, contactId);</div><div class="line">                    InputStream is = ContactsContract.Contacts</div><div class="line">                            .openContactPhotoInputStream(resolver, uri);</div><div class="line">                    contactPhoto = BitmapFactory.decodeStream(is);</div><div class="line">                &#125;<span class="keyword">else</span> &#123;</div><div class="line">                    contactPhoto = BitmapFactory.decodeResource(context.getResources(),R.drawable.icon_head);</div><div class="line">                &#125;</div><div class="line">                Contact contact = <span class="keyword">new</span> Contact(contactName, phoneNumber, contactPhoto);</div><div class="line">                mContactsList.add(contact);</div><div class="line">            &#125;</div><div class="line">            phoneCursor.close();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> mContactsList;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>添加用户权限：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.READ_CONTACTS"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具类/" rel="tag">#工具类</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/29/java-regular-expression-util/" rel="next" title="正则表达式的使用">
+                <i class="fa fa-chevron-left"></i> 正则表达式的使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/29/android-file-util/" rel="prev" title="Android关于文件File的工具类">
+                Android关于文件File的工具类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/head.jpeg"
+               alt="codepet" />
+          <p class="site-author-name" itemprop="name">codepet</p>
+          <p class="site-description motion-element" itemprop="description">追求卓越，成功会出其不意地上门</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="feed-link motion-element" style="background-color: rgb(56,183,234);">
+                  <a style="color: white;" href='javascript:(
+      												function go() {
+      													function c() {
+      														var e = document.createElement("link");
+      														e.setAttribute("type", "text/css");
+      														e.setAttribute("rel", "stylesheet");
+      														e.setAttribute("href", f);
+      														e.setAttribute("class", l);
+      														document.body.appendChild(e)    }
+      													function h() {
+      														var e = document.getElementsByClassName(l);
+      														for (var t = 0; t < e.length; t++) {
+      															document.body.removeChild(e[t])
+      															}
+      													}
+      													function p() {
+      														var e = document.createElement("div");
+      														e.setAttribute("class", a);
+      														document.body.appendChild(e);
+      														setTimeout(function() {
+      															document.body.removeChild(e)
+      														}, 100)
+      													}
+      													function d(e) {
+      														return {
+      															height : e.offsetHeight,
+      															width : e.offsetWidth
+      														}
+      													}
+      													function v(i) {
+      														var s = d(i);
+      														return s.height > e && s.height < n && s.width > t && s.width < r
+      													}
+      													function m(e) {
+      														var t = e;
+      														var n = 0;
+      														while (!!t) {
+      															n += t.offsetTop;
+      															t = t.offsetParent
+      														}
+      														return n
+      													}
+      													function g() {
+      														var e = document.documentElement;
+      														if (!!window.innerWidth) {
+      															return window.innerHeight
+      														} else if (e && !isNaN(e.clientHeight)) {
+      															return e.clientHeight
+      														}
+      														return 0
+      													}
+      													function y() {
+      														if (window.pageYOffset) {
+      															return window.pageYOffset
+      														}
+      														return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+      													}
+      													function E(e) {
+      														var t = m(e);
+      														return t >= w && t <= b + w
+      													}
+      													var songs = [ "http://7xs0af.com1.z0.glb.clouddn.com/High-Die-Young.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-I-Want-You-to-Know.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-Summer-Vibe.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-Viva-La-Vida.mp3",
+      																  "http://7xs0af.com1.z0.glb.clouddn.com/High-Wake.mp3"];
+      													function S() {
+      														var e = document.getElementById("audio_element_id");
+      														if(e != null){
+      															var index = parseInt(e.getAttribute("curSongIndex"));
+      															if(index > songs.length - 2) {
+      																index = 0;
+      															} else {
+      																index++;
+      															}
+      															e.setAttribute("curSongIndex", index);
+      															N();
+      														}
+      														e.src = i;
+      														e.play()
+      													}
+      													function x(e) {
+      														e.className += " " + s + " " + o
+      													}
+      													function T(e) {
+      														e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+      													}
+      													function N() {
+      														var e = document.getElementsByClassName(s);
+      														var t = new RegExp("\\b" + s + "\\b");
+      														for (var n = 0; n < e.length; ) {
+      															e[n].className = e[n].className.replace(t, "")
+      														}
+      													}
+      													function initAudioEle() {
+      														var e = document.getElementById("audio_element_id");
+      														if(e === null){
+      															e = document.createElement("audio");
+      															e.setAttribute("class", l);
+      															e.setAttribute("curSongIndex", 0);
+      															e.id = "audio_element_id";
+      															e.loop = false;
+      															e.bgcolor = 0;
+      															e.addEventListener("canplay", function() {
+      																setTimeout(function() {
+      																	x(k)
+      																}, 500);
+      																setTimeout(function() {
+      																	N();
+      																	p();
+      																	for (var e = 0; e < O.length; e++) {
+      																		T(O[e])
+      																	}
+      																}, 15500)
+      															}, true);
+      															e.addEventListener("ended", function() {
+      																N();
+      																h();
+      																go();
+      															}, true);
+      															e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+      															document.body.appendChild(e);
+      														}
+      													}
+      													initAudioEle();
+      													var e = 30;
+      													var t = 30;
+      													var n = 350;
+      													var r = 350;
+      													var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+      													var i = songs[curSongIndex];
+      													var s = "mw-harlem_shake_me";
+      													var o = "im_first";
+      													var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+      													var a = "mw-strobe_light";
+      													var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+      													var l = "mw_added_css";
+                                var b = g();
+      													var w = y();
+      													var C = document.getElementsByTagName("*");
+      													var k = null;
+      													for (var L = 0; L < C.length; L++) {
+      														var A = C[L];
+      														if (v(A)) {
+      															if (E(A)) {
+      																k = A;
+      																break
+      															}
+      														}
+      													}
+      													if (A === null) {
+      														console.warn("Could not find a node of the right size. Please try a different page.");
+      														return
+      													}
+      													c();
+      													S();
+      													var O = [];
+      													for (var L = 0; L < C.length; L++) {
+      														var A = C[L];
+      														if (v(A)) {
+      															O.push(A)
+      														}
+      													}
+      												})()'>
+                    High一下
+                  </a>
+                </div>
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取手机中音乐列表"><span class="nav-number">1.</span> <span class="nav-text">获取手机中音乐列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取系统联系人"><span class="nav-number">2.</span> <span class="nav-text">获取系统联系人</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">codepet</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
