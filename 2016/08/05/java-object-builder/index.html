@@ -94,7 +94,7 @@
 <meta property="og:description" content="对于类而言，为了让客户端获取它自身的一个实例，最常用的方法就是提供一个公有的构造器。还有一种方法，名为静态工厂方法（不对应于设计模式中的工厂方法）.
 
 我们应该考虑用静态工厂方法代替构造器。一个静态工厂方法创建对象的简单例子：1234567public static Person newInstance()&amp;#123;	Person person = new Person();	if (pers">
-<meta property="og:updated_time" content="2016-08-05T13:39:26.700Z">
+<meta property="og:updated_time" content="2016-08-05T14:08:05.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对象的创建">
 <meta name="twitter:description" content="对于类而言，为了让客户端获取它自身的一个实例，最常用的方法就是提供一个公有的构造器。还有一种方法，名为静态工厂方法（不对应于设计模式中的工厂方法）.
@@ -325,6 +325,7 @@
 <p>对于类而言，为了让客户端获取它自身的一个实例，最常用的方法就是提供一个公有的构造器。<br>还有一种方法，名为<strong>静态工厂方法</strong>（不对应于设计模式中的工厂方法）.</p>
 </blockquote>
 <h3 id="我们应该考虑用静态工厂方法代替构造器。"><a href="#我们应该考虑用静态工厂方法代替构造器。" class="headerlink" title="我们应该考虑用静态工厂方法代替构造器。"></a>我们应该考虑用静态工厂方法代替构造器。</h3><p>一个静态工厂方法创建对象的简单例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Person <span class="title">newInstance</span><span class="params">()</span></span>&#123;</div><div class="line">	Person person = <span class="keyword">new</span> Person();</div><div class="line">	<span class="keyword">if</span> (person==<span class="keyword">null</span>) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"error"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> person;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>优势：</p>
 <ul>
 <li>它们有名称</li>
