@@ -258,6 +258,236 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/29/android-contentprovider-util/" itemprop="url">
+                  ContentProvider的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-29T14:45:23+08:00" content="2016-07-29">
+              2016-07-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="获取手机中音乐列表"><a href="#获取手机中音乐列表" class="headerlink" title="获取手机中音乐列表"></a>获取手机中音乐列表</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line"> * 用于从数据库中查询歌曲的信息，保存在List当中</div><div class="line"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Mp3Infos&gt; <span class="title">getMp3Infos</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">    Cursor cursor = context.getContentResolver().query(</div><div class="line">            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>,</div><div class="line">            MediaStore.Audio.Media.DEFAULT_SORT_ORDER);</div><div class="line">    List&lt;Mp3Infos&gt; mp3Infos = <span class="keyword">new</span> ArrayList&lt;Mp3Infos&gt;();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cursor.getCount(); i++) &#123;</div><div class="line">        Mp3Infos mp3Info = <span class="keyword">new</span> Mp3Infos();</div><div class="line">        cursor.moveToNext();</div><div class="line">        <span class="keyword">long</span> id = cursor.getLong(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media._ID)); <span class="comment">// 音乐id</span></div><div class="line">        String title = cursor.getString((cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.TITLE)));<span class="comment">// 音乐标题</span></div><div class="line">        String artist = cursor.getString(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.ARTIST));<span class="comment">// 艺术家</span></div><div class="line">        <span class="keyword">long</span> duration = cursor.getLong(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.DURATION));<span class="comment">// 时长</span></div><div class="line">        <span class="keyword">long</span> size = cursor.getLong(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.SIZE)); <span class="comment">// 文件大小</span></div><div class="line">        String url = cursor.getString(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.DATA)); <span class="comment">// 文件路径</span></div><div class="line">        <span class="keyword">int</span> isMusic = cursor.getInt(cursor</div><div class="line">                .getColumnIndex(MediaStore.Audio.Media.IS_MUSIC));<span class="comment">// 是否为音乐</span></div><div class="line">        <span class="keyword">if</span> (isMusic != <span class="number">0</span>) &#123; <span class="comment">// 只把音乐添加到集合当中</span></div><div class="line">            mp3Info.setId(id);</div><div class="line">            mp3Info.setTitle(title);</div><div class="line">            mp3Info.setArtist(artist);</div><div class="line">            mp3Info.setDuration(duration);</div><div class="line">            mp3Info.setSize(size);</div><div class="line">            mp3Info.setPath(url);</div><div class="line">            mp3Infos.add(mp3Info);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> mp3Infos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/29/android-contentprovider-util/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/29/java-regular-expression-util/" itemprop="url">
+                  正则表达式的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-29T14:17:37+08:00" content="2016-07-29">
+              2016-07-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line"> * 验证手机格式</div><div class="line"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isMobileNO</span><span class="params">(String mobiles)</span> </span>&#123;</div><div class="line">    <span class="comment">/**</div><div class="line">     * 移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188</div><div class="line">     * 联通：130、131、132、152、155、156、185、186</div><div class="line">     * 电信：133、153、180、189、（1349卫通）</div><div class="line">     * 总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9</div><div class="line">     */</span></div><div class="line">    <span class="comment">// "[1]"代表第1位为数字1</span></div><div class="line">    <span class="comment">// "[358]"代表第二位可以为3、5、8中的一个</span></div><div class="line">    <span class="comment">// "\\d&#123;9&#125;"代表后面是可以是0～9的数字，有9位。</span></div><div class="line">    String telRegex = <span class="string">"[1][358]\\d&#123;9&#125;"</span>;</div><div class="line">    <span class="keyword">if</span> (TextUtils.isEmpty(mobiles))</div><div class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">return</span> mobiles.matches(telRegex);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/29/java-regular-expression-util/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/28/android-common-util/" itemprop="url">
                   Android开发中常用的工具类
                 </a>
@@ -517,7 +747,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -525,7 +755,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -534,7 +764,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
